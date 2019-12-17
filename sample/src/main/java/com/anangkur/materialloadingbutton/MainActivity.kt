@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupNormalButton(){
         normal_button.setText("Normal Button")
+        normal_button.setColor(ContextCompat.getColor(this, R.color.gray))
         normal_button.setOnClickListener {
             if (isNormalButtonProgress){
                 isNormalButtonProgress = false
@@ -41,6 +42,7 @@ class MainActivity : AppCompatActivity() {
         rounded_button.setRadius(100f)
         rounded_button.setColor(ContextCompat.getColor(this, R.color.colorPrimary))
         rounded_button.setText("Rounded Button")
+        rounded_button.setTextColor(ContextCompat.getColor(this, R.color.white))
         rounded_button.setOnClickListener {
             if (isRoundedButtonProgress){
                 isRoundedButtonProgress = false
@@ -56,10 +58,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupRoundedGradientButton(){
         rounded_gradient_button.setRadius(100f)
+        rounded_gradient_button.setOrientation(MaterialLoadingButton.Orientation.TL_BR)
         rounded_gradient_button.setGradientColor(
-            ContextCompat.getColor(this, R.color.colorPrimary),
-            ContextCompat.getColor(this, R.color.colorAccent))
+            ContextCompat.getColor(this, R.color.lilac),
+            ContextCompat.getColor(this, R.color.half_baked))
         rounded_gradient_button.setText("Rounded Gradient Button")
+        rounded_gradient_button.setTextColor(ContextCompat.getColor(this, R.color.white))
         rounded_gradient_button.setOnClickListener {
             if (isRoundedGradientButtonProgress){
                 isRoundedGradientButtonProgress = false

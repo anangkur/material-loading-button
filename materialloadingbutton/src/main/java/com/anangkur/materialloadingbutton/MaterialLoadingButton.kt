@@ -1,13 +1,22 @@
 package com.anangkur.materialloadingbutton
 
 import android.content.Context
+import android.content.res.ColorStateList
+import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.RippleDrawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.RelativeLayout
+import androidx.annotation.ColorInt
+import androidx.core.content.ContextCompat
+import androidx.core.view.setPadding
+import kotlin.math.roundToInt
+
 
 class MaterialLoadingButton(context: Context, attrs: AttributeSet): RelativeLayout(context, attrs){
 
@@ -19,10 +28,17 @@ class MaterialLoadingButton(context: Context, attrs: AttributeSet): RelativeLayo
     private var endColor: Int = 0
 
     private var cornerRadius: Float = 0f
+    private var mRadiusTopLeft: Float = 0f
+    private var mRadiusTopRight: Float = 0f
+    private var mRadiusBottomRight: Float = 0f
+    private var mRadiusBottomLeft: Float = 0f
 
     private var textButton: String = ""
-
     private var orientation = Orientation.TOP_BOTTOM
+
+    private var textColor: Int = 0
+
+    private val rippleColor = adjustAlpha(ContextCompat.getColor(context, R.color.ripple), 0.26f)
 
     enum class Orientation {
         TOP_BOTTOM,
@@ -36,6 +52,7 @@ class MaterialLoadingButton(context: Context, attrs: AttributeSet): RelativeLayo
     }
 
     init {
+        view.setPadding(calculateDp(8))
         addView(view)
     }
 
@@ -56,19 +73,63 @@ class MaterialLoadingButton(context: Context, attrs: AttributeSet): RelativeLayo
 
     fun setRadius(radius: Float){
         cornerRadius = radius
-        button.background = setupGradientDrawable()
+        button.background = setupBackground()
     }
 
     fun setColor(color: Int){
         startColor = color
         endColor = color
-        button.background = setupGradientDrawable()
+        button.background = setupBackground()
     }
 
     fun setGradientColor(startColor: Int, endColor: Int){
         this.startColor = startColor
         this.endColor = endColor
-        button.background = setupGradientDrawable()
+        button.background = setupBackground()
+    }
+
+    fun setOrientation(orientation: Orientation){
+        this.orientation = orientation
+        button.background = setupBackground()
+    }
+
+    fun setTextColor(color: Int){
+        textColor = color
+        button.setTextColor(textColor)
+    }
+
+    private fun applyRadius(drawable: GradientDrawable) {
+        if (cornerRadius > 0) {
+            drawable.cornerRadius = cornerRadius
+        } else {
+            drawable.cornerRadii = floatArrayOf(
+                mRadiusTopLeft, mRadiusTopLeft, mRadiusTopRight, mRadiusTopRight,
+                mRadiusBottomRight, mRadiusBottomRight, mRadiusBottomLeft, mRadiusBottomLeft
+            )
+        }
+    }
+
+    private fun getRippleDrawable(defaultDrawable: Drawable): Drawable? {
+        return RippleDrawable(
+            ColorStateList.valueOf(rippleColor),
+            defaultDrawable,
+            defaultDrawable
+        )
+    }
+
+    private fun setupBackground(): Drawable? {
+        val defaultDrawable = GradientDrawable(setupOrientation(orientation), setupColor(startColor, endColor))
+        applyRadius(defaultDrawable)
+
+        return getRippleDrawable(defaultDrawable)
+    }
+
+    private fun adjustAlpha(@ColorInt color: Int, factor: Float): Int {
+        val alpha = (Color.alpha(color) * factor).roundToInt()
+        val red: Int = Color.red(color)
+        val green: Int = Color.green(color)
+        val blue: Int = Color.blue(color)
+        return Color.argb(alpha, red, green, blue)
     }
 
     override fun setOnClickListener(l: OnClickListener?) {
@@ -82,12 +143,6 @@ class MaterialLoadingButton(context: Context, attrs: AttributeSet): RelativeLayo
         return colors
     }
 
-    private fun setupGradientDrawable(): GradientDrawable{
-        val gradientDrawable = GradientDrawable(setupOrientation(orientation), setupColor(startColor, endColor))
-        gradientDrawable.cornerRadius = cornerRadius
-        return gradientDrawable
-    }
-
     private fun setupOrientation(orientation: Orientation): GradientDrawable.Orientation{
         return when(orientation){
             Orientation.TOP_BOTTOM -> GradientDrawable.Orientation.TOP_BOTTOM
@@ -99,5 +154,10 @@ class MaterialLoadingButton(context: Context, attrs: AttributeSet): RelativeLayo
             Orientation.LEFT_RIGHT -> GradientDrawable.Orientation.LEFT_RIGHT
             Orientation.TL_BR -> GradientDrawable.Orientation.TL_BR
         }
+    }
+
+    private fun calculateDp(size: Int): Int{
+        var  scale: Float = resources.displayMetrics.density
+        return (size * scale + 0.5f).toInt()
     }
 }

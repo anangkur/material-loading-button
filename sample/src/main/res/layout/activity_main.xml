@@ -10,17 +10,15 @@
     <com.anangkur.materialloadingbutton.MaterialLoadingButton
         android:id="@+id/normal_button"
         android:layout_width="match_parent"
-        android:layout_height="56dp"/>
+        android:layout_height="?actionBarSize"/>
 
     <com.anangkur.materialloadingbutton.MaterialLoadingButton
         android:id="@+id/rounded_button"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_marginTop="10dp"/>
+        android:layout_height="?actionBarSize" />
 
     <com.anangkur.materialloadingbutton.MaterialLoadingButton
         android:id="@+id/rounded_gradient_button"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_marginTop="10dp"/>
+        android:layout_height="?actionBarSize"/>
 </LinearLayout>
