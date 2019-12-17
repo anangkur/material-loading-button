@@ -2,12 +2,15 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="54dp">
-    <Button
-        android:id="@+id/button"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/text"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/app_name"/>
+        android:layout_height="48dp"
+        android:layout_centerInParent="true"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:textStyle="bold"/>
     <ProgressBar
         android:id="@+id/progress"
         style="?android:progressBarStyleSmall"

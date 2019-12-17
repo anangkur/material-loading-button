@@ -12,6 +12,7 @@ class MainActivity : AppCompatActivity() {
     private var isNormalButtonProgress = false
     private var isRoundedButtonProgress = false
     private var isRoundedGradientButtonProgress = false
+    private var isRoundedStrokeButtonProgress = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         setupNormalButton()
         setupRoundedButton()
         setupRoundedGradientButton()
+        setupRoundedStrokeButton()
     }
 
     private fun setupNormalButton(){
@@ -73,6 +75,24 @@ class MainActivity : AppCompatActivity() {
                 isRoundedGradientButtonProgress = true
                 rounded_gradient_button.showProgress()
                 Toast.makeText(this, "Rounded Gradient Button Show Progress", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun setupRoundedStrokeButton(){
+        rounded_stroke_button.setRadius(100f)
+        rounded_stroke_button.setStroke(1, ContextCompat.getColor(this, R.color.colorPrimary), ContextCompat.getColor(this, R.color.white))
+        rounded_stroke_button.setText("Rounded Stroke Button")
+        rounded_stroke_button.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary))
+        rounded_stroke_button.setOnClickListener {
+            if (isRoundedStrokeButtonProgress){
+                isRoundedStrokeButtonProgress = false
+                rounded_stroke_button.hideProgress()
+                Toast.makeText(this, "Rounded Stroke Button Hide Progress", Toast.LENGTH_SHORT).show()
+            }else{
+                isRoundedStrokeButtonProgress = true
+                rounded_stroke_button.showProgress()
+                Toast.makeText(this, "Rounded Stroke Button Show Progress", Toast.LENGTH_SHORT).show()
             }
         }
     }
