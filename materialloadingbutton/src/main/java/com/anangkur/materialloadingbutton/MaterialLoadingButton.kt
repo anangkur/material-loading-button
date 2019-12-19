@@ -3,13 +3,13 @@ package com.anangkur.materialloadingbutton
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RippleDrawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import android.widget.TextView
@@ -25,6 +25,8 @@ class MaterialLoadingButton(context: Context, attrs: AttributeSet): RelativeLayo
     private var textView: TextView = view.findViewById(R.id.text)
     private var progressBar: ProgressBar = view.findViewById(R.id.progress)
 
+    private var orientation = Orientation.TOP_BOTTOM
+
     private var startColor: Int = 0
     private var endColor: Int = 0
 
@@ -32,15 +34,14 @@ class MaterialLoadingButton(context: Context, attrs: AttributeSet): RelativeLayo
     private var strokeWidth: Int = 0
 
     private var cornerRadius: Float = 0f
-    private var mRadiusTopLeft: Float = 0f
-    private var mRadiusTopRight: Float = 0f
-    private var mRadiusBottomRight: Float = 0f
-    private var mRadiusBottomLeft: Float = 0f
+    private var cornerRadiusTopLeft: Float = 0f
+    private var cornerRadiusTopRight: Float = 0f
+    private var cornerRadiusBottomRight: Float = 0f
+    private var cornerRadiusBottomLeft: Float = 0f
 
     private var textButton: String = ""
-    private var orientation = Orientation.TOP_BOTTOM
-
     private var textColor: Int = 0
+    private var textTypeface: Typeface? = null
 
     private val rippleColor = adjustAlpha(ContextCompat.getColor(context, R.color.ripple), 0.26f)
 
@@ -103,11 +104,21 @@ class MaterialLoadingButton(context: Context, attrs: AttributeSet): RelativeLayo
         textView.setTextColor(textColor)
     }
 
-    fun setStroke(width: Int, colorStroke: Int, colorBackground: Int){
+    fun setStroke(width: Int, colorStroke: Int, colorBackground: Int?){
+        if (colorBackground == null){
+            startColor = Color.TRANSPARENT
+            endColor = Color.TRANSPARENT
+        }else{
+            startColor = colorBackground
+            endColor = colorBackground
+        }
         strokeColor = colorStroke
         strokeWidth = width
-        startColor = colorBackground
-        endColor = colorBackground
+        textView.background = setupBackground()
+    }
+
+    fun setTypeFace(typeface: Typeface){
+        textTypeface = typeface
         textView.background = setupBackground()
     }
 
@@ -116,8 +127,8 @@ class MaterialLoadingButton(context: Context, attrs: AttributeSet): RelativeLayo
             drawable.cornerRadius = cornerRadius
         } else {
             drawable.cornerRadii = floatArrayOf(
-                mRadiusTopLeft, mRadiusTopLeft, mRadiusTopRight, mRadiusTopRight,
-                mRadiusBottomRight, mRadiusBottomRight, mRadiusBottomLeft, mRadiusBottomLeft
+                cornerRadiusTopLeft, cornerRadiusTopLeft, cornerRadiusTopRight, cornerRadiusTopRight,
+                cornerRadiusBottomRight, cornerRadiusBottomRight, cornerRadiusBottomLeft, cornerRadiusBottomLeft
             )
         }
     }
@@ -134,6 +145,9 @@ class MaterialLoadingButton(context: Context, attrs: AttributeSet): RelativeLayo
         val defaultDrawable = GradientDrawable(setupOrientation(orientation), setupColor(startColor, endColor))
         if (strokeColor != 0 && strokeWidth != 0){
             defaultDrawable.setStroke(calculateDp(strokeWidth), strokeColor)
+        }
+        if (textTypeface != null){
+            textView.typeface = textTypeface
         }
         applyRadius(defaultDrawable)
 

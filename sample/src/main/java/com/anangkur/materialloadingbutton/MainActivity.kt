@@ -1,10 +1,11 @@
 package com.anangkur.materialloadingbutton
 
+import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -83,6 +84,7 @@ class MainActivity : AppCompatActivity() {
         rounded_stroke_button.setRadius(100f)
         rounded_stroke_button.setStroke(1, ContextCompat.getColor(this, R.color.colorPrimary), ContextCompat.getColor(this, R.color.white))
         rounded_stroke_button.setText("Rounded Stroke Button")
+        rounded_stroke_button.setTypeFace(ResourcesCompat.getFont(this, R.font.comfortaa_bold)!!)
         rounded_stroke_button.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary))
         rounded_stroke_button.setOnClickListener {
             if (isRoundedStrokeButtonProgress){
