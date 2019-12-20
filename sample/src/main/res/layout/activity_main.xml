@@ -1,29 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
     <com.anangkur.materialloadingbutton.MaterialLoadingButton
         android:id="@+id/normal_button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        app:mlb_textButton="Normal Button"/>
 
     <com.anangkur.materialloadingbutton.MaterialLoadingButton
         android:id="@+id/rounded_button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        app:mlb_cornerRadius="100dp"
+        app:mlb_textButton="Rounded Button"/>
 
     <com.anangkur.materialloadingbutton.MaterialLoadingButton
         android:id="@+id/rounded_gradient_button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        app:mlb_cornerRadius="100dp"
+        app:mlb_startColor="@color/lilac"
+        app:mlb_endColor="@color/half_baked"
+        app:mlb_textColor="@color/white"
+        app:mlb_textButton="Rounded Gradient Button"/>
+
+    <com.anangkur.materialloadingbutton.MaterialLoadingButton
+        android:id="@+id/normal_gradient_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:mlb_startColor="@color/lilac"
+        app:mlb_endColor="@color/half_baked"
+        app:mlb_textColor="@color/white"
+        app:mlb_textButton="Normal Gradient Button"/>
 
     <com.anangkur.materialloadingbutton.MaterialLoadingButton
         android:id="@+id/rounded_stroke_button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        app:mlb_cornerRadius="100dp"
+        app:mlb_strokeColor="@color/colorPrimary"
+        app:mlb_strokeWidth="1dp"
+        app:mlb_defaultColor="@color/white"
+        app:mlb_textColor="@color/colorPrimary"
+        app:mlb_textButton="Rounded Stroke Button"/>
+
+    <com.anangkur.materialloadingbutton.MaterialLoadingButton
+        android:id="@+id/normal_stroke_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:mlb_strokeColor="@color/colorPrimary"
+        app:mlb_strokeWidth="1dp"
+        app:mlb_defaultColor="@color/white"
+        app:mlb_textColor="@color/colorPrimary"
+        app:mlb_textButton="Normal Stroke Button"/>
 </LinearLayout>

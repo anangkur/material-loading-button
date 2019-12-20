@@ -23,6 +23,5 @@
         </attr>
         <attr name="mlb_textButton" format="string"/>
         <attr name="mlb_textColor" format="color"/>
-        <attr name="mlb_textTypeFace" format="string"/>
     </declare-styleable>
 </resources>
