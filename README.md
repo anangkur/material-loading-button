@@ -13,17 +13,17 @@ Material Button with loading inside the button.
 Include Airship into the build.gradle file:
 
 ```
-   allprojects {
-		repositories {
-			...
-			maven { url 'https://jitpack.io' }
-		}
-	}
+allprojects {
+   repositories {
+      ...
+      maven { url 'https://jitpack.io' }
+   }
+}
 ```
 ```
 dependencies {
-	        implementation 'com.github.anangkur:Material-Loading-Button:0.0.1'
-	}
+   implementation 'com.github.anangkur:Material-Loading-Button:0.0.1'
+}
 ```
 
 ## Features
