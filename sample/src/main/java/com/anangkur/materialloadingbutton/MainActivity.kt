@@ -2,9 +2,7 @@ package com.anangkur.materialloadingbutton
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -12,6 +10,9 @@ class MainActivity : AppCompatActivity() {
     private var isNormalButtonProgress = false
     private var isRoundedButtonProgress = false
     private var isRoundedGradientButtonProgress = false
+    private var isNormalGradientButtonProgress = false
+    private var isRoundedStrokeButtonProgress = false
+    private var isNormalStrokeButtonProgress = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,10 +21,12 @@ class MainActivity : AppCompatActivity() {
         setupNormalButton()
         setupRoundedButton()
         setupRoundedGradientButton()
+        setupRoundedStrokeButton()
+        setupNormalGradientButton()
+        setupNormalStrokeButton()
     }
 
     private fun setupNormalButton(){
-        normal_button.setText("Normal Button")
         normal_button.setOnClickListener {
             if (isNormalButtonProgress){
                 isNormalButtonProgress = false
@@ -38,9 +41,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupRoundedButton(){
-        rounded_button.setRadius(100f)
-        rounded_button.setColor(ContextCompat.getColor(this, R.color.colorPrimary))
-        rounded_button.setText("Rounded Button")
         rounded_button.setOnClickListener {
             if (isRoundedButtonProgress){
                 isRoundedButtonProgress = false
@@ -55,11 +55,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupRoundedGradientButton(){
-        rounded_gradient_button.setRadius(100f)
-        rounded_gradient_button.setGradientColor(
-            ContextCompat.getColor(this, R.color.colorPrimary),
-            ContextCompat.getColor(this, R.color.colorAccent))
-        rounded_gradient_button.setText("Rounded Gradient Button")
         rounded_gradient_button.setOnClickListener {
             if (isRoundedGradientButtonProgress){
                 isRoundedGradientButtonProgress = false
@@ -69,6 +64,48 @@ class MainActivity : AppCompatActivity() {
                 isRoundedGradientButtonProgress = true
                 rounded_gradient_button.showProgress()
                 Toast.makeText(this, "Rounded Gradient Button Show Progress", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun setupRoundedStrokeButton(){
+        rounded_stroke_button.setOnClickListener {
+            if (isRoundedStrokeButtonProgress){
+                isRoundedStrokeButtonProgress = false
+                rounded_stroke_button.hideProgress()
+                Toast.makeText(this, "Rounded Stroke Button Hide Progress", Toast.LENGTH_SHORT).show()
+            }else{
+                isRoundedStrokeButtonProgress = true
+                rounded_stroke_button.showProgress()
+                Toast.makeText(this, "Rounded Stroke Button Show Progress", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun setupNormalGradientButton(){
+        normal_gradient_button.setOnClickListener {
+            if (isNormalGradientButtonProgress){
+                isNormalGradientButtonProgress = false
+                normal_gradient_button.hideProgress()
+                Toast.makeText(this, "Normal Gradient Button Hide Progress", Toast.LENGTH_SHORT).show()
+            }else{
+                isNormalGradientButtonProgress = true
+                normal_gradient_button.showProgress()
+                Toast.makeText(this, "Normal Gradient Button Show Progress", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun setupNormalStrokeButton(){
+        normal_stroke_button.setOnClickListener {
+            if (isNormalStrokeButtonProgress){
+                isNormalStrokeButtonProgress = false
+                normal_stroke_button.hideProgress()
+                Toast.makeText(this, "Normal Stroke Button Hide Progress", Toast.LENGTH_SHORT).show()
+            }else{
+                isNormalStrokeButtonProgress = true
+                normal_stroke_button.showProgress()
+                Toast.makeText(this, "Normal Stroke Button Show Progress", Toast.LENGTH_SHORT).show()
             }
         }
     }
