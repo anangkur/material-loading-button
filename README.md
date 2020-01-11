@@ -3,6 +3,8 @@ Material Button with loading inside the button.
 
 [![](https://jitpack.io/v/anangkur/Material-Loading-Button.svg)](https://jitpack.io/#anangkur/Material-Loading-Button)
 
+<img src="https://github.com/anangkur/Material-Loading-Button/blob/master/demo%20app.gif" width="240" height="480" />
+
 ## Requirements
 - minSdkVersion 21
 - compileSdkVersion 29
