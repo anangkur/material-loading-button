@@ -5,9 +5,12 @@ import android.content.res.ColorStateList
 import android.content.res.TypedArray
 import android.graphics.Color
 import android.graphics.Typeface
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RippleDrawable
+import android.graphics.drawable.StateListDrawable
+import android.os.Build
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -138,11 +141,38 @@ class MaterialLoadingButton(context: Context, attrs: AttributeSet): RelativeLayo
     }
 
     private fun getRippleDrawable(defaultDrawable: Drawable): Drawable? {
-        return RippleDrawable(
-            ColorStateList.valueOf(rippleColor),
-            defaultDrawable,
-            defaultDrawable
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            RippleDrawable(
+                ColorStateList.valueOf(rippleColor),
+                defaultDrawable,
+                defaultDrawable
+            )
+        } else {
+            getStateListDrawable(defaultColor, rippleColor)
+        }
+    }
+
+    private fun getStateListDrawable(
+        normalColor: Int, pressedColor: Int
+    ): StateListDrawable {
+        val states = StateListDrawable()
+        states.addState(
+            intArrayOf(android.R.attr.state_pressed),
+            ColorDrawable(pressedColor)
         )
+        states.addState(
+            intArrayOf(android.R.attr.state_focused),
+            ColorDrawable(pressedColor)
+        )
+        states.addState(
+            intArrayOf(android.R.attr.state_activated),
+            ColorDrawable(pressedColor)
+        )
+        states.addState(
+            intArrayOf(),
+            ColorDrawable(normalColor)
+        )
+        return states
     }
 
     private fun setupBackground(): Drawable? {
